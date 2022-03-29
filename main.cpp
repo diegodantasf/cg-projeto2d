@@ -23,8 +23,8 @@ void handleDisplayFunc() {
   for (GLint i = 0; i < (GLint)triangles.size(); ++i) {
     auto& st = triangles[i];
     glPushMatrix();
-    glScaled(st.scale, st.scale, 1.0);
     glTranslated(st.tx, st.ty, 0);
+    glScaled(st.scale, st.scale, 1.0);
     glRotated(st.angle, 0.0, 0.0, 1.0);
     if (i == currentTriangle) {
       glColor3f(0.0, 1.0, 0.0);
@@ -92,7 +92,7 @@ void init() {
 int main(int argc, char* argv[])
 {
   glutInit(&argc, argv);
-  glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+  glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
   GLint screen_width  = glutGet(GLUT_SCREEN_WIDTH),
         screen_height = glutGet(GLUT_SCREEN_HEIGHT);  
   glutInitWindowPosition((screen_width - WINDOW_WIDTH) / 2, (screen_height - WINDOW_WIDTH) / 2);
@@ -106,7 +106,7 @@ int main(int argc, char* argv[])
   glutMainLoop();
   
   return EXIT_SUCCESS;
-}
+}   
 
 
 
