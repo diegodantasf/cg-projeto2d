@@ -45,7 +45,7 @@ void handleDisplayFunc() {
 
 void handleKeyboardFunc(GLubyte key, GLint x, GLint y) {
   // select triangle
-  if (key == '\t') {
+  if (key == '\t' && triangles.size() > 0) {
     currentTriangle = (currentTriangle + 1) % triangles.size();
   }
   // create new triangle
@@ -53,6 +53,10 @@ void handleKeyboardFunc(GLubyte key, GLint x, GLint y) {
     triangles.push_back(TriangleState());
     triangles.back().tx = -0.5;
     triangles.back().ty = 0.5;
+  }
+  // delete triangle
+  if (key == '-' && !triangles.empty()) {
+    triangles.erase(triangles.begin() + currentTriangle);
   }
   // translate object
   auto& st = triangles[currentTriangle];
@@ -74,8 +78,7 @@ void handleKeyboardFunc(GLubyte key, GLint x, GLint y) {
   // scale object
   if (key == 'i') {
     st.scale += 0.03;
-  }
-  if (key == 'u') {
+  } else if (key == 'u') {
     st.scale += -0.03;
   }
   glutPostRedisplay();
